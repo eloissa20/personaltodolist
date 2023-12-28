@@ -33,7 +33,7 @@ const Form = ({ todos, setTodos, editTodo, setEditTodo }) => {
         description: description, 
         completed: false, 
         created: new Date(), 
-        updated: null // Initial value for new task
+        updated: null 
       }]);
       setInput('');
       setDescription('');

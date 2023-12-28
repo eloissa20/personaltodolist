@@ -68,8 +68,6 @@ const TodosList = ({ todos, setTodos, setEditTodo, activeTab }) => {
               </div>
             )}
           </div>
-         
-
           <div className="todo-actions">
             {!todo.completed && (
               <button
