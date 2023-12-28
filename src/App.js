@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Header from "./components/Header";
+import Form from "./components/Form";
+import TodosList from "./components/TodosList";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const initialState = JSON.parse(localStorage.getItem("todos")) || [];
+  const [todos, setTodos] = useState(initialState);
+  const [editTodo, setEditTodo] = useState(null);
+  const [activeTab, setActiveTab] = useState("ToDo");
+
+  useEffect(() => {
+    console.log(todos); // Log the current state of todos
+  }, [todos]);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="app-wrapper">
+        <Header />
+
+        <Form
+          todos={todos}
+          setTodos={setTodos}
+          editTodo={editTodo}
+          setEditTodo={setEditTodo}
+        />
+
+        <div className="tabs">
+          <button
+            className={`tab ${activeTab === "ToDo" ? "active-tab" : ""}`}
+            onClick={() => handleTabChange("ToDo")}
+          >
+            To Do
+          </button>
+          <button
+            className={`tab ${activeTab === "Completed" ? "active-tab" : ""}`}
+            onClick={() => handleTabChange("Completed")}
+          >
+            Completed
+          </button>
+        </div>
+
+        <TodosList
+          todos={todos} // Pass the full todos array
+          setTodos={setTodos}
+          setEditTodo={setEditTodo}
+          activeTab={activeTab} // Pass activeTab as a prop
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default App;

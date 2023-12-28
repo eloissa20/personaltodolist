@@ -1,38 +1,273 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'Arial', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.container {
+  background: linear-gradient(to right bottom, #ffafbd, #ffc3a0);
+  width: 100%;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.app-wrapper {
+  background-color: #243447;
+  width: 800px; 
+  min-height: 650px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.486);
+}
+
+
+.header h1 {
+  color: transparent; /* Make the text color transparent */
+  background-image: linear-gradient(to right, #5B51D8, #b55fee, #e646a0, #ee6492, #FCAF45, #FFDC80);
+  -webkit-background-clip: text; /* Apply the background only to the text */
+  background-clip: text;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: row; /* Align items in a row */
+  align-items: center; /* Align items vertically */
+  gap: 10px; /* Spacing between elements */
+}
+
+.task-input,
+textarea.task-input {
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.task-input {
+  flex: 1;
+}
+
+textarea.task-input {
+  resize: none;
+  height: 80px;
+}
+
+.button-add {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  border: none;
+  margin-top: 15px;
+  background: 
+  linear-gradient(217deg, rgba(91, 81, 216, 0.8), rgba(91, 81, 216, 0) 70.71%),
+  linear-gradient(127deg, rgba(131, 58, 180, 0.8), rgba(131, 58, 180, 0) 70.71%),
+  linear-gradient(336deg, rgba(193, 53, 132, 0.8), rgba(193, 53, 132, 0) 70.71%),
+  linear-gradient(45deg, rgba(225, 48, 108, 0.8), rgba(225, 48, 108, 0) 70.71%),
+  linear-gradient(154deg, rgba(253, 29, 29, 0.8), rgba(253, 29, 29, 0) 70.71%),
+  linear-gradient(62deg, rgba(245, 96, 64, 0.8), rgba(245, 96, 64, 0) 70.71%),
+  linear-gradient(280deg, rgba(119, 119, 55, 0.8), rgba(119, 119, 55, 0) 70.71%),
+  linear-gradient(198deg, rgba(252, 175, 69, 0.8), rgba(252, 175, 69, 0) 70.71%),
+  linear-gradient(316deg, rgba(255, 220, 128, 0.8), rgba(255, 220, 128, 0) 70.71%);
+
+  color: white;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-content {
+  flex-grow: 1;
+  margin-left: 15px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.todo-title {
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.todo-description {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.list-item input[type="checkbox"] {
+  margin-left: 10px;
+  transform: scale(2);
+}
+
+.list-item input[type="text"] {
+  flex: 1;
+  margin-right: 10px;
+  padding: 5px;
+  border: none;
+  background: transparent;
+  color: #333;
+}
+
+.list-item .material-icons {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: center;
+}
+
+.complete {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  z-index: 10;
+}
+
+.popup-container {
+  background-color: #1d2a37;
+  align-items: center;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(255, 207, 185, 0.788);
+}
+
+.popup-container h3 {
+  font-size: 18px;
+  margin-left: 8px;
+  margin-bottom: 8px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.button-update,
+.button-cancel {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.button-update {
+  background-color: #F875AA;
+  margin-left: 100px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.button-cancel {
+  background-color: #A367B1;
+  margin-right: 100px;
+}
+
+input:focus,
+button:focus {
+  outline: none;
+}
+
+
+@media (max-width: 800px) {
+  .app-wrapper {
+    width: 90%; /* Adjust width for smaller screens */
   }
-  to {
-    transform: rotate(360deg);
+
+  .task-form {
+    flex-direction: column; /* Stack elements in a column on smaller screens */
   }
+
+  .task-input,
+  .button-add {
+    width: 100%; /* Full width on smaller screens */
+  }
+}
+
+
+.tabs {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px; 
+}
+
+.tab {
+  padding: 10px 20px;
+  margin: 0 -15px;
+  font-weight: 600;
+  border: none;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 15px;
+}
+
+.tab:hover {
+  background-color: #e0e0e0;
+}
+
+.active-tab {
+  background-image: linear-gradient(to right, #EA1179, #5B51D8);
+  color: white;
+}
+
+
+.todo-created,
+.todo-completed,
+.todo-updated {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 5px;
+  margin-right: 20px;
+  padding-left: 20px;
+}
+
+.todo-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
